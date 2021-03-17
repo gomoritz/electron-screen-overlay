@@ -1,13 +1,13 @@
 const { ipcRenderer } = require('electron')
 
-const main = document.querySelector('.main')
+const main = document.querySelector('.main')!!
 ipcRenderer.on('disable', () => {
     console.log('Disable received')
     disable()
 })
 
-const circle = document.querySelector('.circle')
-const innerCircle = document.querySelector('.inner-circle')
+const circle = document.querySelector('.circle')!!
+const innerCircle = document.querySelector('.inner-circle')!!
 
 // trigger termination from window
 circle.addEventListener('click', () => disable())
