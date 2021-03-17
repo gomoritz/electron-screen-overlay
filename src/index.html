@@ -1,123 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>Hello</title>
-		<style>
-			* {
-				box-sizing: border-box;
-				padding: 0;
-				margin: 0;
-				background-color: transparent;
-			}
+   <head>
+      <meta charset="UTF-8"/>
+      <title>Hello</title>
+      <style>
+          * {
+              box-sizing: border-box;
+              padding: 0;
+              margin: 0;
+              background-color: transparent;
+          }
 
-			body {
-				width: 100vw;
-				height: 100vh;
-				overflow: hidden;
-			}
+          body {
+              width: 100vw;
+              height: 100vh;
+              overflow: hidden;
+          }
 
-			#main {
-				width: 100vw;
-				height: 20vh;
-				position: absolute;
-				bottom: 0;
+          .main {
+              width: 100vw;
+              height: 150px;
+              position: absolute;
+              bottom: 0;
 
-				background: linear-gradient(transparent, #5b21b6 100%);
-				opacity: 0;
-				transform: translateY(20vh);
+              background: linear-gradient(transparent, #5B21B6 100%);
+              opacity: 0;
+              transform: translateY(100%);
 
-				animation: introduce 0.5s ease-out forwards;
-				animation-delay: 1s;
+              animation: introduce .4s ease-in-out forwards;
+              animation-delay: 1s;
 
-				display: flex;
-				justify-content: center;
-				align-items: center;
-			}
+              display: flex;
+              justify-content: center;
+              align-items: center;
+          }
 
-			#circle {
-				width: 15vh;
-				height: 15vh;
-				margin-top: -8vh;
+          .circle {
+              width: 120px;
+              height: 120px;
+              margin-top: -80px;
 
-				background: linear-gradient(to left bottom, #843cf1, #4c1d95);
-				border-radius: 100%;
-				box-shadow: 0 0 20px 2px rgba(67, 25, 130, 0.87);
+              background: linear-gradient(to left bottom, #843CF1, #4C1D95);
+              border-radius: 1000000px;
+              box-shadow: 0 0 20px 5px rgba(67, 25, 130, 0.87);
 
-				animation: circle 4s infinite ease-in-out;
-			}
+              animation: introduce-circle 1.0s 1.2s forwards ease-in-out, circle 4s 2.4s infinite ease-in-out;
+              transform: scale(.1);
+          }
 
-			#inner-circle {
-				width: 100%;
-				height: 100%;
-				background: transparent;
-				border-bottom: 3px solid rgba(255, 255, 255, 0.7);
-				border-top: 3px solid rgba(255, 255, 255, 0.7);
-				border-radius: 100%;
+          .inner-circle {
+              width: 100%;
+              height: 100%;
+              background: transparent;
+              border-bottom: 3px solid rgba(255, 255, 255, 0.7);
+              border-top: 3px solid rgba(255, 255, 255, 0.7);
+              border-radius: 1000000px;
 
-				animation: inner-circle 3s infinite ease-in-out;
-			}
+              animation: introduce-circle .8s 1.2s forwards ease-in-out, inner-circle 3s 2.1s infinite ease-in-out;
+              transform: scale(.1);
+          }
 
-			.fade-out {
-				animation: dismiss 0.5s ease-in forwards !important;
-			}
+          .dismiss {
+              animation: dismiss .4s .4s ease-in-out forwards;
+              transform: translateY(0);
+              opacity: 1;
+          }
 
-			@keyframes introduce {
-				from {
-					opacity: 0;
-					transform: translateY(20vh);
-				}
-				to {
-					opacity: 1;
-					transform: translateY(0);
-				}
-			}
+          .dismiss-circle {
+              animation: circle 4s 2.4s infinite ease-in-out, dismiss-circle 0.7s forwards ease-in-out;
+              transform: scale(1.0);
+          }
 
-			@keyframes dismiss {
-				from {
-					opacity: 1;
-					transform: translateY(0);
-				}
-				to {
-					opacity: 0;
-					transform: translateY(20vh);
-				}
-			}
+          .dismiss-inner-circle {
+              animation: inner-circle 3s 2.1s infinite ease-in-out, dismiss-circle 0.8s forwards ease-in-out;
+              transform: scale(1.0);
+          }
 
-			@keyframes circle {
-				from {
-					transform: scale(1) rotate(0deg);
-				}
-				50% {
-					transform: scale(1.1) rotate(180deg);
-				}
-				to {
-					transform: scale(1) rotate(360deg);
-				}
-			}
+          @keyframes introduce {
+              from {
+                  opacity: 0;
+                  transform: translateY(100%);
+              }
+              to {
+                  opacity: 1;
+                  transform: translateY(0);
+              }
+          }
 
-			@keyframes inner-circle {
-				from {
-					transform: rotate(0deg);
-				}
-				50% {
-					transform: rotate(180deg);
-				}
-				to {
-					transform: rotate(360deg);
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<div id="main">
-			<div id="circle">
-				<div id="inner-circle"></div>
-			</div>
-		</div>
+          @keyframes introduce-circle {
+              from {
+                  transform: scale(.1);
+              }
+              70% {
+                  transform: scale(1.1);
+              }
+              to {
+                  transform: scale(1.0);
+              }
+          }
 
-		<script>
-			require('./renderer.js');
-		</script>
-	</body>
+          @keyframes dismiss {
+              from {
+                  opacity: 1;
+                  transform: translateY(0);
+              }
+              to {
+                  opacity: 0;
+                  transform: translateY(100%);
+              }
+          }
+
+          @keyframes dismiss-circle {
+              from {
+                  transform: scale(1.0);
+              }
+              30% {
+                  transform: scale(1.1);
+              }
+              to {
+                  transform: scale(0.0);
+              }
+          }
+
+          @keyframes circle {
+              from {
+                  transform: scale(1) rotate(0deg);
+              }
+              50% {
+                  transform: scale(1.1) rotate(180deg);
+              }
+              to {
+                  transform: scale(1) rotate(360deg);
+              }
+          }
+
+          @keyframes inner-circle {
+              from {
+                  transform: rotate(0deg);
+              }
+              50% {
+                  transform: rotate(180deg);
+              }
+              to {
+                  transform: rotate(360deg);
+              }
+          }
+      </style>
+   </head>
+   <body>
+      <div class="main">
+         <div class="circle">
+            <div class="inner-circle"></div>
+         </div>
+      </div>
+
+      <script>
+          require('./renderer.js')
+      </script>
+   </body>
 </html>
