@@ -1,12 +1,12 @@
-const electron = require("electron")
+const electron = require('electron')
 const { app, BrowserWindow, ipcMain } = electron
-const path = require("path")
+const path = require('path')
 
 let window
 let screen
 
 app.on(
-    "ready",
+    'ready',
     () =>
         setTimeout(() => {
             screen = electron.screen.getPrimaryDisplay()
@@ -33,24 +33,24 @@ app.on(
             // window.webContents.toggleDevTools()
 
             window
-                .loadFile(path.resolve(__dirname, "index.html"))
+                .loadFile(path.resolve(__dirname, 'index.html'))
                 .then(() => window.show())
                 .catch(console.error)
         }),
     0
 )
 
-ipcMain.on("set-ignore-mouse-events", (event, ...args) => {
+ipcMain.on('set-ignore-mouse-events', (event, ...args) => {
     BrowserWindow.fromWebContents(event.sender).setIgnoreMouseEvents(...args)
 })
 
-ipcMain.on("disable-confirm", () => {
-    console.log("Disable received!")
+ipcMain.on('disable-confirm', () => {
+    console.log('Disable received!')
     window.close()
 })
 
 // trigger termination in main process
 setTimeout(() => {
-    console.log("Timing out...")
-    window.webContents.send("disable")
+    console.log('Timing out...')
+    window.webContents.send('disable')
 }, 5_000)
