@@ -1,31 +1,27 @@
 import electron, { app, BrowserWindow, ipcMain, Display } from 'electron'
 const path = require('path')
 
-let mainWindow
+let mainWindow: BrowserWindow
 let primaryScreen: Display
 
 app.on('ready', () =>
     setTimeout(() => {
         primaryScreen = electron.screen.getPrimaryDisplay()
         mainWindow = new BrowserWindow({
-            x: 0,
-            y: primaryScreen.size.height - 250,
-            width: primaryScreen.size.width,
-            height: 250,
             webPreferences: {
                 devTools: true,
                 nodeIntegration: true,
                 contextIsolation: false,
             },
+            fullscreen: true,
+            alwaysOnTop: true,
             transparent: true,
             frame: false,
-            alwaysOnTop: true,
-            show: false,
+            show: false
         })
 
-        mainWindow.setIgnoreMouseEvents(false)
+        mainWindow.setIgnoreMouseEvents(true)
         mainWindow.setFocusable(false)
-        // mainWindow.webContents.toggleDevTools()
 
         mainWindow
             .loadFile(path.resolve(__dirname, 'index.html'))
